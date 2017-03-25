@@ -31,12 +31,234 @@
       <h1>signup</h1>
     <div role="main" class="ui-content">
       <div class="ui-grid-solo">
-      <a href="#home" data-role="button" class="lognBtn">Login</a>
+      <a href="#dialogs" data-role="button" class="lognBtn">Login</a>
       </div> 
       <div class="ui-grid-solo">
         <a href="#signup" data-role="button" class="signupBtn">Signup</a>
       </div> 
     </div>
+  </div>
+  <div data-role="page" id="dialogs">
+      <h1>Dialogs Plugins</h1>
+      <div role="main" class="ui-content">
+        <p>Installing Plugins in command prompt</p>
+        <p>Type the following command in the command prompt</p>
+        <h3 style="margin-left: 65px;">cordova plugin add cordova-plugin-dialogs</h3>
+        <p>Add buttons in<strong> index.html</strong></p>
+        <div class="well" style="text-align: center;">
+            <span><</span><span>button</span> id = "dialogAlert">ALERT<span><</span>/button>
+            <span><</span><span>button</span> id = "dialogConfirm">CONFIRM<span><</span>/button>
+            <span><</span><span>button</span> id = "dialogPrompt">PROMPT<span><</span>/button>
+            <span><</span><span>button</span> id = "dialogBeep">BEEP<span><</span>/button>
+            <button id = "dialogAlert">ALERT</button>
+            <button id = "dialogConfirm">CONFIRM</button>
+            <button id = "dialogPrompt">PROMPT</button>
+            <button id = "dialogBeep">BEEP</button>
+        </div>
+        <p>Add Event Listeners</p>
+        <p>Add this event listener inside the <strong>onDeviceReady</strong> function in <strong>index.js</strong></p>
+        <div class="well" style="text-align: center;">
+            document.getElementById("dialogAlert").addEventListener("click", dialogAlert);
+            document.getElementById("dialogConfirm").addEventListener("click", dialogConfirm);
+            document.getElementById("dialogPrompt").addEventListener("click", dialogPrompt);
+            document.getElementById("dialogBeep").addEventListener("click", dialogBeep);
+        </div>
+        <p>Now create the callback function in <strong>index.js.</strong> The first one is <strong>dialodAlert.</strong></p>
+        <div class="well">
+            function dialogAlert() {
+                            var message = "I am Alert Dialog!";
+                            var title = "ALERT";
+                            var buttonName = "Alert Button";
+                            navigator.notification.alert(message, alertCallback, title, buttonName);
+                function alertCallback() {
+                            console.log("Alert is Dismissed!");
+                }
+    
+            }
+        </div>
+         <p>The Second we need to create <strong>dialogConfirm</strong> function.</p>
+         <div class="well">
+             function dialogConfirm() {
+                    var message = "Am I Confirm Dialog?";
+                    var title = "CONFIRM";
+                    var buttonLabels = "YES,NO";
+                    navigator.notification.confirm(message, confirmCallback, title, buttonLabels);
+                function confirmCallback(buttonIndex) {
+                    console.log("You clicked " + buttonIndex + " button!");
+                }
+                }
+         </div>
+         <p>The third function is <strong>dialogPrompt.</strong> Its allow user to type text into dialog input element.</p>
+         <div class="well">
+             function dialogPrompt() {
+                    var message = "Am I Prompt Dialog?";
+                    var title = "PROMPT";
+                    var buttonLabels = ["YES","NO"];
+                    var defaultText = "Default"
+                    navigator.notification.prompt(message, promptCallback, title, buttonLabels, defaultText);
+                function promptCallback(result) {
+                    console.log("You clicked " + result.buttonIndex + " button! \n" + 
+                    "You entered " +  result.input1);
+                }
+    
+                }
+         </div>
+         <p>The last one is dialogBeep. This is used for calling audio beep notification. The <strong>times</strong> prameter will set number repeats for the beep signal.</p>
+         <div class="well">
+             function dialogBeep() {
+                    var times = 2;
+                    navigator.notification.beep(times);
+                }
+         <a href="#device">click</a>  
+         </div> 
+      </div>    
+  </div>
+  <div data-role="page" id="device">
+      <h3 style="text-align: center;">Device Plugins</h3>
+      <div role="main" class="ui-content">
+            <p>Installing Plugins in command prompt</p>
+            <p>Type the following command in the command prompt</p>
+            <h3>cordova plugin add cordova-plugin-device</h3>
+            <p>Add buttons in<strong> index.html</strong></p>
+            <div class="well">
+                <span><</span>button id = "cordovaDevice">CORDOVA DEVICE<span><</span>/button></p>
+                <button id = "cordovaDevice">CORDOVA DEVICE</button>
+            </div>
+            <p>Add Event Listeners</p>
+            <p>Add this event listener inside the <strong>onDeviceReady</strong> function in <strong>index.js</strong></p>
+            <div class="well">
+                document.getElementById("cordovaDevice").addEventListener("click", cordovaDevice);
+            </div>
+            <p>The function below will show how to use all possibilities the plugin provides. We will place it in <strong>index.js.</strong></p>
+            <div class="well">
+                function cordovaDevice() {
+                        alert("Cordova version: " + device.cordova + "\n" +
+                        "Device model: " + device.model + "\n" +
+                        "Device platform: " + device.platform + "\n" +
+                        "Device UUID: " + device.uuid + "\n" +
+                        "Device version: " + device.version);
+                }
+            </div>
+            <a href="#geolocation">click</a>
+      </div>
+  </div>
+  <div data-role="page" id="geolocation">
+      <h3 style="text-align: center;">Geolocation Plugins</h3>
+      <div role="main" class="ui-content">
+        <p>Installing Plugins in command prompt</p>
+        <p>Type the following command in the command prompt</p>
+        <h3>cordova plugin add cordova-plugin-geolocation</h3>
+        <p>Add buttons in<strong> index.html</strong></p>
+        <div class="well">
+            <span><</span>button id = "getPosition">CURRENT POSITION<span><</span>/button>
+            <span><</span>button id = "watchPosition">WATCH POSITION<span><</span>/button>
+            <button id = "getPosition">CURRENT POSITION</button>
+            <button id = "watchPosition">WATCH POSITION</button>
+        </div>
+        <p>Add Event Listeners</p>
+        <p>Add this event listener inside the <strong>onDeviceReady</strong> function in <strong>index.js</strong></p>
+        <div class="well">
+           document.getElementById("getPosition").addEventListener("click", getPosition);
+            document.getElementById("watchPosition").addEventListener("click", watchPosition);
+        </div>
+        <p>Two functions needs to be created for two event listeners. One will be used for getting the current position and the other for watching position.</p>
+        <div class="well">
+            function getPosition() {
+
+   var options = {
+      enableHighAccuracy: true,
+      maximumAge: 3600000
+   }
+    
+   var watchID = navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
+
+   function onSuccess(position) {
+
+      alert('Latitude: '          + position.coords.latitude          + '\n' +
+         'Longitude: '         + position.coords.longitude         + '\n' +
+         'Altitude: '          + position.coords.altitude          + '\n' +
+         'Accuracy: '          + position.coords.accuracy          + '\n' +
+         'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+         'Heading: '           + position.coords.heading           + '\n' +
+         'Speed: '             + position.coords.speed             + '\n' +
+         'Timestamp: '         + position.timestamp                + '\n');
+   };
+
+   function onError(error) {
+      alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
+   }
+}
+
+function watchPosition() {
+
+   var options = {
+      maximumAge: 3600000,
+      timeout: 3000,
+      enableHighAccuracy: true,
+   }
+
+   var watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
+
+   function onSuccess(position) {
+
+      alert('Latitude: '          + position.coords.latitude          + '\n' +
+         'Longitude: '         + position.coords.longitude         + '\n' +
+         'Altitude: '          + position.coords.altitude          + '\n' +
+         'Accuracy: '          + position.coords.accuracy          + '\n' +
+         'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+         'Heading: '           + position.coords.heading           + '\n' +
+         'Speed: '             + position.coords.speed             + '\n' +
+         'Timestamp: '         + position.timestamp                + '\n');
+   };
+
+   function onError(error) {
+      alert('code: '    + error.code    + '\n' +'message: ' + error.message + '\n');
+   }
+
+}
+            
+        </div>
+        <a href="#whitelist">click</a>
+      </div>
+  </div>
+  <div data-role="page" id="whitelist">
+      <h3 style="text-align: center;">Navigation Whitelist Plugins</h3>
+      <div role="main" class="ui-content">
+        <p>This plugin allows us to implement whitelist policy for app's navigation. When we create new Cordova project, the whitelist plugin is installed and implemented by default. You can open the <strong>config.xml</strong> file to see <strong>allow-intent</strong> default settings provided by <strong>Cordova.</strong></p>
+        <h4>In the simple example below we are allowing links to some external URL. This code is placed in <strong>config.xml.</strong> Navigation to file:// URLs is allowed by default.</h4>
+        <div class="well">
+            <span><</span>allow-navigation href = "http://example.com/*" />
+        </div>
+        <p>The asterix sign, *, is used to allow navigation to multiple values. In above example we are allowing navigation to all sub domains of the <strong>example.com.</strong> The same can be applied to protocol or prefix to the host.</p>
+        <div class="well">
+            <span><</span>allow-navigation href = "*://*.example.com/*" />
+        </div>
+        <h2>Intent Whitelist</h2>
+        <p>There is also <strong>allow-intent</strong> element which is used to specify which URLs are allowed to open the system. You can see in the <strong>config.xml</strong> that Cordova already allowed most of the needed links for us.</p>
+        <h2>Network Request Whitelist</h2>
+        <p>When you look inside <strong>config.xml</strong> file, there is <strong><span><</span>access origin="*" /></strong> element. This element allows all network requests to our app via Cordova hooks. If you want to allow only specific requests, you can delete it from the <strong>config.xml</strong> and set it yourself.</p>
+        <p>The same principle is used as in previous examples.</p>
+        <div class="well">
+            <span><</span>access origin = "http://example.com" />
+        </div>
+        <p>This will allow all network requests from <strong>http://example.com.</strong></p>
+        <h2>Content Security Policy</h2>
+        <p>You can see current security policy for your app inside head element in <strong>ndex.html</strong></p>
+        <div class="well">
+            <span><</span>meta http-equiv = "Content-Security-Policy" content = "default-src 
+            'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 
+             'self' 'unsafe-inline'; media-src *">
+        </div>
+        <p>This is default configuration. If you want to allow everything from the same origin and <strong>example.com</strong> you can use −</p>
+        <div class="well">
+            <span><</span>meta http-equiv = "Content-Security-Policy" content = "default-src 'self' foo.com">
+        </div>
+        <p>You can also allow everything, but restrict CSS and JavaScript to the same origin.</p>
+        <div class="well">
+            <span><</span>meta http-equiv = "Content-Security-Policy" content = "default-src *; 
+            style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+        </div>
+      </div>
   </div>
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
